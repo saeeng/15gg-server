@@ -4,6 +4,7 @@
     "start": "nodemon --exec ts-node ./src/app.ts"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "fastify": "^3.18.0",
