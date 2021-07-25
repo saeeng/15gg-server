@@ -1,4 +1,4 @@
-export const options = {
+export const swagger_config = {
   routePrefix: '/docs',
   openapi: '3.0.0',
   exposeRoute: true,

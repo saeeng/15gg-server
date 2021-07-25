@@ -1,8 +1,6 @@
 // Import Swagger documentation
 const doc = require('./doc/userApi');
-const testFunt = async (req: any, reply: any) => {
-  return { test: 'hi' };
-};
+const testFunct = require('../controllers');
 
 export interface IRoute {
   method: string;
@@ -10,19 +8,19 @@ export interface IRoute {
   handler: any;
   schema?: any;
 }
-const routes: IRoute[] = [
-  {
-    method: 'POST',
-    url: '/api/test',
-    handler: testFunt,
-    schema: doc.addTestSchema,
-  },
-  {
-    method: 'GET',
-    url: '/api/user',
-    handler: testFunt,
-    schema: doc.getUserSchema,
-  },
-];
+function routes(fastify, options, done) {
+  const ROUTING_MAP: IRoute[] = [
+    {
+      method: 'GET',
+      url: '/test',
+      handler: testFunct,
+      schema: doc.getTestSchema,
+    },
+  ];
+  ROUTING_MAP.forEach((route: IRoute) => {
+    fastify.route(route);
+  });
+  done();
+}
 
 module.exports = routes;

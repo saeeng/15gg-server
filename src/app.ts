@@ -5,18 +5,15 @@ const fastify = require('fastify')({
 });
 
 // Register Swagger
-const { options } = require('./config/swagger');
-fastify.register(require('fastify-swagger'), options);
-
-// Register MongoDB
-// fastify.register(require('./plugins/dbConnector'))
-
-// Register Router
-const routes = require('./router');
-import { IRoute } from './router';
-routes.forEach((route: IRoute) => {
-  fastify.route(route);
-});
+const { swagger_config } = require('./config/swagger');
+const { axios_config } = require('./config/axios');
+const { env_config } = require('./config/env');
+const routers = require('./router');
+fastify
+  .register(require('./plugins/env'), env_config)
+  .register(require('fastify-swagger'), swagger_config)
+  .register(require('./plugins/axiosPlugin'), axios_config)
+  .register(require('./router'), { prefix: 'api' });
 
 const start = async () => {
   try {
@@ -28,4 +25,3 @@ const start = async () => {
   }
 };
 start();
-export {};

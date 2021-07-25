@@ -1,4 +1,4 @@
-const fastifyPlugin = require('fastify-plugin');
+// const fastifyPlugin = require('fastify-plugin');
 
 async function dbConnector(fastify, options) {
   fastify.register(require('fastify-mongodb'), {
