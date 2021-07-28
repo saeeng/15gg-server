@@ -12,7 +12,7 @@ function routes(fastify, options, done) {
   const ROUTING_MAP: IRoute[] = [
     {
       method: 'GET',
-      url: '/test',
+      url: '/test/:summonerName',
       handler: testFunct,
       schema: doc.getTestSchema,
     },

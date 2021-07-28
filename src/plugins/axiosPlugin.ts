@@ -10,5 +10,5 @@ const axiosPlugin = async (fastify, options, done) => {
 };
 
 module.exports = fap(axiosPlugin, {
-  name: 'axiosp',
+  name: 'axios',
 });

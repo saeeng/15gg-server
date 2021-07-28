@@ -13,7 +13,11 @@ fastify
   .register(require('./plugins/env'), env_config)
   .register(require('fastify-swagger'), swagger_config)
   .register(require('./plugins/axiosPlugin'), axios_config)
-  .register(require('./router'), { prefix: 'api' });
+  .register(require('./plugins/riot'), axios_config)
+  .register(require('./router'), { prefix: 'api' })
+  .ready((err) => {
+    console.log(err);
+  });
 
 const start = async () => {
   try {
