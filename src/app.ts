@@ -21,7 +21,7 @@ fastify
 
 const start = async () => {
   try {
-    await fastify.listen(3000);
+    await fastify.listen(8000);
     fastify.swagger();
   } catch (err) {
     fastify.log.error(err);

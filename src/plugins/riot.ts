@@ -19,7 +19,11 @@ const riot = async (fastify, options, done) => {
       return await fastify.axios.v1.get(`/match/v4/matches/${matchId}`);
     };
 
-    fastify.decorate(confKey, { summonerByName, matchlistByAccount, matches });
+    const leagueBySummonerId = async (encryptedSummonerId: string): Promise<any> => {
+      return await fastify.axios.v1.get(`league/v4/entries/by-summoner/${encryptedSummonerId}`);
+    };
+
+    fastify.decorate(confKey, { summonerByName, matchlistByAccount, matches, leagueBySummonerId });
     done();
   } catch (err) {
     done(err);
