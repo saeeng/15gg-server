@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply, RequestGenericInterface } from 'fastify';
-
+import { fstat } from 'fs';
+const fs = require('fs');
 interface requestGeneric extends RequestGenericInterface {
   Querystring: {
     gameId?: number;
@@ -48,15 +49,15 @@ export interface IData {
 }
 
 module.exports = async function (request: FastifyRequest<requestGeneric>, reply: FastifyReply) {
-  const { status: summonerStatus, data: summonerData } = await this.riotApi.summonerByName(
-    request.params.summonerName,
-  );
-  const { status: mathcesStatus, data: matchesData } = await this.riotApi.matchlistByAccount(
-    summonerData.accountId,
-  );
-  const { status: leagueStatus, data: leagueData } = await this.riotApi.leagueBySummonerId(
-    summonerData.id,
-  );
+  // const { status: summonerStatus, data: summonerData } = await this.riotApi.summonerByName(
+  //   request.params.summonerName,
+  // );
+  // const { status: mathcesStatus, data: matchesData } = await this.riotApi.matchlistByAccount(
+  //   summonerData.accountId,
+  // );
+  // const { status: leagueStatus, data: leagueData } = await this.riotApi.leagueBySummonerId(
+  //   summonerData.id,
+  // );
   // matchesData = matchesData.matches;
   // matchesData.forEach((match) => {
   //   match.date = new Date(match.timestamp);
@@ -70,7 +71,9 @@ module.exports = async function (request: FastifyRequest<requestGeneric>, reply:
   //     return this.riotApi.matches(gameId);
   //   }),
   // );
-  const data: IData = { summoner: summonerData, league: leagueData[0], mathches: matchesData };
+  // const data: IData = { summoner: summonerData, league: leagueData[0], mathches: matchesData };
 
+  const dataBuffer = fs.readFileSync('sample.json');
+  const data: IData = JSON.parse(dataBuffer.toString());
   reply.send(data);
 };
