@@ -15,6 +15,9 @@ fastify
   .register(require('./plugins/axiosPlugin'), axios_config)
   .register(require('./plugins/riot'), axios_config)
   .register(require('./router'), { prefix: 'api' })
+  .register(require('fastify-cors'), {
+    origin: '*',
+  })
   .ready((err) => {
     console.log(err);
   });
