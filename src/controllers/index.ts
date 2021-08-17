@@ -45,7 +45,7 @@ export interface ILeageu {
 export interface IData {
   summoner: ISummoner;
   mathches: any;
-  league: ILeageu;
+  league: ILeageu[];
 }
 
 module.exports = async function (request: FastifyRequest<requestGeneric>, reply: FastifyReply) {
@@ -71,9 +71,9 @@ module.exports = async function (request: FastifyRequest<requestGeneric>, reply:
   //     return this.riotApi.matches(gameId);
   //   }),
   // );
-  // const data: IData = { summoner: summonerData, league: leagueData[0], mathches: matchesData };
-
-  const dataBuffer = fs.readFileSync('sample.json');
+  // const data: IData = { summoner: summonerData, league: leagueData, mathches: matchesData };
+  // fs.writeFileSync('sample3.json', JSON.stringify(data));
+  const dataBuffer = fs.readFileSync('sample3.json');
   const data: IData = JSON.parse(dataBuffer.toString());
   reply.send(data);
 };
